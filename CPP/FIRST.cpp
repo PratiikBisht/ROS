@@ -1,6 +1,6 @@
 #include "rosbot_control/rosbot_class.h"
 #include <ros/ros.h>
-
+// new declaration
 using namespace std;
 int main(int argc, char**argv){
     ros::init(argc, argv, "rosbot__node")
