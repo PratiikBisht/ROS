@@ -1,5 +1,12 @@
 // MAde therobot move using if else condition 
 // can add differnet coordinates on x to make the rbot move for longer distance 
+
+//cd ~/catkin_ws
+//catkin_make
+//source devel/setup.bash
+//rosrun c_scripts unit2_exercise
+
+// above are the terminal command to run the prigram
 #include "rosbot_control/rosbot_class.h"
 #include <ros/ros.h>
 
