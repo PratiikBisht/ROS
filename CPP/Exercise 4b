@@ -1,0 +1,29 @@
+// This code retrieves all 720 laser readings using get_laser_full and iterates through them, printing each reading individually using a loop and pointer operations.
+
+//cd ~/catkin_ws
+//catkin_make
+//source devel/setup.bash
+//rosrun c_scripts unit4_exercise
+
+
+#include "rosbot_control/rosbot_class.h"
+#include <ros/ros.h>
+
+int main(int argc, char **argv) {
+  ros::init(argc, argv, "rosbot_node");
+
+  RosbotClass rosbot;
+
+  rosbot.move_forward(3);
+
+  float *pointer;
+
+  pointer = rosbot.get_laser_full();
+  ROS_INFO_STREAM("Laser values: ");
+  for (int i = 0; i < 720; i++) {
+    ROS_INFO_STREAM(*pointer);
+    pointer++;
+  }
+
+  return 0;
+}
