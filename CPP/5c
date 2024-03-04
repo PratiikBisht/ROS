@@ -191,3 +191,55 @@ The function
 
   void laser_callback(const sensor_msgs::LaserScan::ConstPtr &laser_msg);
   void odom_callback(const nav_msgs::Odometry::ConstPtr &odom_msg);
+
+
+
+See below the initialized functions that you have been using in order to move the robots around:
+
+  void move();
+  void move_forward(int n_secs);
+  void move_backwards(int n_secs);
+  void turn(string clock, int n_secs);
+  void stop_moving();
+  float get_position(int param);
+  std::list<float> get_position_full();
+  double get_time();
+  float get_laser(int index);
+  float *get_laser_full(); 
+
+
+The general idea is that this variables receive information from the robot sensors (they are called subscribers) or send commands to the robot (they are called publishers).
+
+// RosbotClass constructor
+RosbotClass::RosbotClass() {
+  n = ros::NodeHandle("~");
+  laser_topic = "/scan";
+  laser_sub = n.subscribe(laser_topic, 10, &RosbotClass::laser_callback, this);
+  vel_topic = "/cmd_vel";
+  vel_pub = n.advertise<geometry_msgs::Twist>(n.resolveName(vel_topic), 1);
+  odom_topic = "/odom";
+  odom_sub = n.subscribe(odom_topic, 10, &RosbotClass::odom_callback, this);
+  ROS_INFO("Initializing node .................................");
+  usleep(2000000);
+}
+
+void RosbotClass::laser_callback(
+    const sensor_msgs::LaserScan::ConstPtr &laser_msg) {
+  laser_range = laser_msg->ranges;
+  // ROS_INFO("Laser value: %f", laser_range);
+}
+void RosbotClass::odom_callback(const nav_msgs::Odometry::ConstPtr &odom_msg) {
+  x_pos = odom_msg->pose.pose.position.x;
+  y_pos = odom_msg->pose.pose.position.y;
+  z_pos = odom_msg->pose.pose.position.z;
+  // ROS_INFO_STREAM("Odometry: x=" << x_pos << " y=" << y_pos << " z=" <<
+  // z_pos);
+
+
+}
+
+
+
+Next, the functions that you have been using in this course are good examples of how to manipulate C++ variables, how to implement conditional statements and loops, and work with pointers and addresses. These functions, if you remember, are:
+
+> move(), move_forward(), move_backwards(), turn(),  stop_moving(), get_position(), get_position_full(), get_time(), get_laser(), get_laser_full()
