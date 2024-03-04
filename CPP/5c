@@ -167,3 +167,27 @@ int main(int argc, char **argv) {
 
   return 0;
 }
+
+
+
+The function
+
+  // Communicate with nodes
+  ros::NodeHandle n;
+  // Laser data
+  ros::Subscriber laser_sub;
+  std::vector<float> laser_range;
+  std::string laser_topic;
+  // Velocity data
+  ros::Publisher vel_pub;
+  geometry_msgs::Twist vel_msg;
+  std::string vel_topic;
+  // Odometry data
+  ros::Subscriber odom_sub;
+  std::string odom_topic;
+  float x_pos;
+  float y_pos;
+  float z_pos;
+
+  void laser_callback(const sensor_msgs::LaserScan::ConstPtr &laser_msg);
+  void odom_callback(const nav_msgs::Odometry::ConstPtr &odom_msg);
